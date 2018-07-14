@@ -1,0 +1,15 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+import mutations from './mutations'
+
+Vue.use(Vuex)
+
+const state = {
+  collapsed: false // 导航栏折叠状态 false展开 true 折叠
+}
+
+export default new Vuex.Store({
+  state,
+  mutations
+})

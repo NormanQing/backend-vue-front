@@ -1,5 +1,5 @@
 <template>
-  <el-aside width="230px">
+  <aside width="230px">
     <el-menu
       :unique-opened="true"
       class="el-menu-vertical-demo"
@@ -34,25 +34,22 @@
         <span slot="title">导航四</span>
       </el-menu-item>
     </el-menu>
-  </el-aside>
+  </aside>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      isCollapse: false
-    }
-  },
-  methods: {
-    // 折叠导航栏
-    collapse: function () {
-      console.log('fff')
-      this.isCollapse = !this.isCollapse
+  computed: {
+    isCollapse () {
+      return this.$store.state.collapsed
     }
   }
 }
 </script>
 
 <style lang="less">
+aside {
+  flex: 0 0 230px;
+  width: 230px;
+}
 </style>

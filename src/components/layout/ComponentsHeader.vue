@@ -5,8 +5,8 @@
     </el-col>
     <el-col :span="10">
       <div class="tools" @click.prevent="collapse">
-				<i class="el-icon-tickets"></i>
-			</div>
+        <i class="el-icon-tickets"></i>
+      </div>
     </el-col>
     <el-col :span="4" class="user-info">
       <el-dropdown>
@@ -26,9 +26,17 @@
 
 <script>
 export default {
+  computed: {
+    collapsed () {
+      return this.$store.state.collapsed
+    }
+  },
   methods: {
     logout () {
       console.log('退出')
+    },
+    collapse () {
+      this.$store.commit('CHANGE_COLLAPS')
     }
   }
 }
@@ -36,51 +44,51 @@ export default {
 
 <style lang="less">
 @import "../../assets/css/element-variables.less";
-.header{
+.header {
   height: @headerHeight;
   line-height: @headerLineHeight;
   background: @headerBackgroundColor;
   color: @headerFontColor;
-  .logo{
+  .logo {
     height: @headerHeight;
     font-size: 22px;
     padding-left: 20px;
     padding-right: 20px;
-    border-color: hsla(62,77%,76%,0.3);
+    border-color: hsla(62, 77%, 76%, 0.3);
     border-right-width: 1px;
     border-right-style: solid;
-    img{
+    img {
       width: 40px;
       float: left;
       margin: 10px 10px 10px 18px;
     }
   }
-  .logo-width{
-		width:230px;
-	}
-	.logo-collapse-width{
-		width:60px
-	}
-  .tools{
+  .logo-width {
+    width: 230px;
+  }
+  .logo-collapse-width {
+    width: 64px;
+  }
+  .tools {
     padding: 0px 23px;
     width: 14px;
     height: @headerHeight;
     line-height: @headerLineHeight;
     cursor: pointer;
-    color: @headerFontColor
+    color: @headerFontColor;
   }
-  .user-info{
+  .user-info {
     text-align: right;
     float: right;
     padding-right: 35px;
-    .user-info-inner{
+    .user-info-inner {
       cursor: pointer;
       color: @headerFontColor;
-      img{
+      img {
         width: 40px;
         height: 40px;
         border-radius: 20px;
-        float:right;
+        float: right;
         margin: 10px 0px 10px 10px;
       }
     }

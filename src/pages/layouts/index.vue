@@ -1,7 +1,7 @@
 <template>
   <el-row class="container">
     <c-header></c-header>
-    <el-col :span="24">
+    <el-col :span="24" class="main">
       <c-navigation></c-navigation>
     </el-col>
   </el-row>
@@ -28,7 +28,7 @@ export default {
     position: absolute;
     top:60px;
     bottom: 0px;
-		overflow: hidden;
+    overflow: hidden;
   }
 }
 </style>
