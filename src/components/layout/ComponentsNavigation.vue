@@ -1,5 +1,5 @@
 <template>
-  <aside width="230px">
+  <el-aside width="230px">
     <el-menu
       :unique-opened="true"
       class="el-menu-vertical-demo"
@@ -34,7 +34,7 @@
         <span slot="title">导航四</span>
       </el-menu-item>
     </el-menu>
-  </aside>
+  </el-aside>
 </template>
 
 <script>
@@ -42,6 +42,11 @@ export default {
   computed: {
     isCollapse () {
       return this.$store.state.collapsed
+    }
+  },
+  methods: {
+    collapse () {
+      this.$store.commit('CHANGE_COLLAPS')
     }
   }
 }
