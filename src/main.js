@@ -9,6 +9,7 @@ import NProgress from 'nprogress'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'font-awesome/css/font-awesome.min.css'
 
 NProgress.inc(0.2)
 NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })

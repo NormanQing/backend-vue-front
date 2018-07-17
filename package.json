@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.4.3",
+    "font-awesome": "^4.7.0",
     "less": "^3.7.1",
     "less-loader": "^4.1.0",
     "nprogress": "^0.2.0",
