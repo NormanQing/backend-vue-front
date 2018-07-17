@@ -1,15 +1,11 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
+import routers from './router'
 
-const Layout = resolve => require(['../pages/layouts'], resolve)
+Vue.use(VueRouter)
 
-Vue.use(Router)
-
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      component: Layout
-    }
-  ]
+let router = new VueRouter({
+  routes: routers.routers
 })
+
+export default router
