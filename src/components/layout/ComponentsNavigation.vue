@@ -4,10 +4,6 @@
       :unique-opened="true"
       class="el-menu-vertical-demo"
       router
-      background-color="#2b3f54"
-      text-color="#fff"
-      active-text-color="#ffd04b"
-      model="horizontal"
       :collapse="isCollapse"
     >
       <el-submenu index="1">
