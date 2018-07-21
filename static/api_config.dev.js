@@ -3,5 +3,5 @@
  */
 
  global.API = {
-  baseUrl = "http://yourdomain.com" // host
+  baseUrl = 'http://yourdomain.com' // host
  }

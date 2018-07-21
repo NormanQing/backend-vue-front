@@ -12,4 +12,9 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // 请求拦截
 axios.interceptors.request.use((config) => {
   let urls = config.url.split('.')
+  if (urls.length > 1) {
+    config.url = `${urls[0]}/${urls[1]}`
+  } else {
+    config.url = global.API.defaultVersion + `/${urls[0]}`
+  }
 })
