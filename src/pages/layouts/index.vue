@@ -5,9 +5,9 @@
       <c-navigation></c-navigation>
       <section class="content-container">
         <div class="grid-content bg-purple-light">
-          <el-col :span="24">
+          <el-col :span="24" class="breadcrumb-container">
             <strong class="title">{{$route.name}}</strong>
-            <el-breadcrumb separator="/">
+            <el-breadcrumb separator="/" class="breadcrumb-inner">
               <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
               <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
               <el-breadcrumb-item>活动列表</el-breadcrumb-item>
@@ -47,14 +47,22 @@ export default {
     top:60px;
     bottom: 0px;
     overflow: hidden;
-  }
-  .content-container{
-    flex:1;
-    overflow-y: scroll;
-    padding: 20px;
-    .breadcrumb-container{
+    .content-container{
+      flex:1;
+      overflow-y: scroll;
+      padding: 20px;
+      .breadcrumb-container{
+        .title {
+          width: 200px;
+          float: left;
+          color: #475669;
+        }
+        .breadcrumb-inner{
+          float: right;
+        }
+      }
       .content-wrapper{
-        background: red;
+        background-color: #fff;
         box-sizing: border-box;
       }
     }

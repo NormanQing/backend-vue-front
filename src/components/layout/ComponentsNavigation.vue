@@ -11,7 +11,7 @@
           <i class="el-icon-location"></i>
           <span slot="title">导航一</span>
         </template>
-        <el-menu-item index="1-0">选项0</el-menu-item>
+        <el-menu-item index="member">会员管理</el-menu-item>
         <el-submenu index="1-4">
           <span slot="title">选项4</span>
           <el-menu-item index="1-4-1">选项1</el-menu-item>
