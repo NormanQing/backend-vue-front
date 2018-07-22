@@ -7,6 +7,33 @@
           <el-input v-if="search.type === 'text' || search.type === 'password'" :type="search.type" v-model="search.form[search.prop]" :placeholder="search.placeholder"></el-input>
           <!--数字输入框-->
           <el-input v-else-if="search.type === 'number'" :type="search.type" v-model.number="search.form[search.prop]" :placeholder="search.placeholder"></el-input>
+          <!--email输入框-->
+          <!--下拉框值改变执行回调-->
+          <el-select v-else-if="search.type === 'select' && search.change" v-model="search.from[search.prop]" @change="search.change">
+            <el-option v-for="(option, key) in search.options" :key="key" :label="option.label" :value="option.value"></el-option>
+          </el-select>
+          <!--下拉框-->
+          <el-select v-else-if="search.type === 'select'" v-model="search.form[search.prop]">
+            <el-option v-for="(option, key) in search.options" :key="key" :label="option.label" :value="option.value"></el-option>
+          </el-select>
+          <!--文本域-->
+          <el-input v-else-if="search.type === 'textarea'" :type="textarea" v-model="search.form[search.prop]" placeholder="search.placeholder"></el-input>
+          <!--单选框-->
+          <el-radio-group v-else-if="search.type === 'radio'" v-model="search.prop">
+            <el-radio v-for="(option, key) in search.options" :key="key" :label="option.value">
+              {{option.label}}
+            </el-radio>
+          </el-radio-group>
+          <!--复选框-->
+          <el-checkbox-group v-else-if="search.type === 'checkbox'" v-model="search.prop">
+            <el-checkbox v-for="(option, key) in search.options" :key="key" :label="option.label"></el-checkbox>
+          </el-checkbox-group>
+          <!--开始时间-->
+          <el-date-picker v-if="search.prop === 'startDate'" type="date" v-model="search.form[search.prop]" :value-format="search.valueFormart" :picker-options="search.options">
+          </el-date-picker>
+          <!--结束时间-->
+          <el-date-picker v-if="search.prop === 'startDate'" type="date" v-model="search.form[search.prop]" :value-format="search.valueFormart" :picker-options="search.options">
+          </el-date-picker>
         </el-form-item>
         <el-form-item>
           <el-button>搜索</el-button>
@@ -143,7 +170,7 @@ export default {
         this.searchAllForm = this.modules.searchForm()
         this.searchForm = this.modules.searchForm().search
       }
-      this.loadData()
+      // this.loadData()
     },
     loadData () {
       this.searchData.page = this.page
