@@ -149,6 +149,7 @@ export default {
       this.searchData.page = this.page
       this.searchData.pagesize = this.pagesize
       this.$http.get(this.modules.url, { params: this.searchData }).then((res) => {
+        console.log(res)
         this.tableData = res.result.data
         res.meta !== undefined && (this.pagination = res.meta.pagination)
       })

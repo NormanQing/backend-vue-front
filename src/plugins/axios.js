@@ -5,7 +5,7 @@ import Vue from 'vue'
 Vue.use(VueAxios, axios)
 
 // ajax 全局配置
-axios.defaults.baseURL = global.API.baseURL
+axios.defaults.baseURL = global.API.baseUrl
 axios.defaults.timeout = 1000 * 30
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
@@ -17,4 +17,5 @@ axios.interceptors.request.use((config) => {
   } else {
     config.url = global.API.defaultVersion + `/${urls[0]}`
   }
+  return config
 })
