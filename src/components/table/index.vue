@@ -57,10 +57,21 @@
             </el-form>
           </template>
         </el-table-column>
+        <!--字段名必须要和datas字段相匹配-->
+        <el-table-column
+          v-else-if="columns.formatter"
+          v-for="(field, key) in columns.tableField" :key="key"
+          :sortable="field.sort_table"
+          :formatter="columns.formatter"
+          :prop="field.prop"
+          :label="field.label"
+          align="center"
+        >
+        </el-table-column>
         <el-table-column
           v-else
           v-for="(field, key) in columns.tableField" :key="key"
-          :sortable="field.sorttable"
+          :sortable="field.sort_table"
           :prop="field.prop"
           :label="field.label"
           align="center"

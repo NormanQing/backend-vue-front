@@ -13,7 +13,7 @@ export default class Member {
   tableColumns () {
     return {
       tableField: [
-        {prop: 'id', label: '序号', type: 'text', sorttable: true},
+        {prop: 'id', label: '序号', type: 'text', sort_table: true},
         {prop: 'user', label: '用户名', type: 'text'},
         {prop: 'email', label: '邮箱', type: 'text'},
         {prop: 'sex', label: '性别', type: 'text'},
