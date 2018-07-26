@@ -6,6 +6,16 @@ Mock.mock(
   {
     status_code: 0,
     message: 'SUCCESS',
+    meta: {
+      pagination: {
+        count: 15,
+        current_page: 1,
+        links: {},
+        per_page: 15,
+        total: 80,
+        total_pages: 6
+      }
+    },
     result: {
       'data|20': [
         {

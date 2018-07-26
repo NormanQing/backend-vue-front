@@ -105,7 +105,7 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="pagination.current_page"
-      :page-sizes="pagesize"
+      :page-sizes="pageSizes"
       :page-size="pagesize"
       layout="total, sizes, prev, pager, next, jumper"
       :total="pagination.total">
@@ -201,7 +201,7 @@ export default {
       this.$http.get(this.modules.url, { params: this.searchData }).then((res) => {
         console.log(res)
         this.tableData = res.data.result.data
-        res.meta !== undefined && (this.pagination = res.meta.pagination)
+        res.data.meta !== undefined && (this.pagination = res.data.meta.pagination)
       })
     },
 
@@ -215,7 +215,7 @@ export default {
       this.$http.get(this.modules.url, { params: searchData }).then((res) => {
         console.log(res)
         this.tableData = res.data.result.data
-        res.meta !== undefined && (this.pagination = res.meta.pagination)
+        res.data.meta !== undefined && (this.pagination = res.data.meta.pagination)
       })
     },
 
