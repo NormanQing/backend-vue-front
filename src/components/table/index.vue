@@ -98,8 +98,18 @@
             size="mini"
             >编辑</el-button>
           </template>
-    </el-table-column>
+      </el-table-column>
       </el-table>
+      <el-pagination
+      v-if="JSON.stringify(pagination) !== '{}'"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="pagination.current_page"
+      :page-sizes="pagesize"
+      :page-size="pagesize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="pagination.total">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -129,6 +139,9 @@ export default {
       page: 1,
       // 每页显示数量
       pagesize: constants.PAGE_SIZE,
+
+      // 10条/页, 20条/页
+      pageSizes: constants.PAGE_SIZES,
 
       // table数据
       tableData: [],
@@ -184,22 +197,7 @@ export default {
     loadData () {
       this.searchData.page = this.page
       this.searchData.pagesize = this.pagesize
-      /* this.tableData = [
-        {
-          id: 1,
-          user: 'zhangsan',
-          email: '132@qq.com',
-          sex: 'm',
-          hoby: '篮球'
-        },
-        {
-          id: 2,
-          user: 'lisi',
-          email: '189@qq.com',
-          sex: 'f',
-          hoby: '足球'
-        }
-      ] */
+
       this.$http.get(this.modules.url, { params: this.searchData }).then((res) => {
         console.log(res)
         this.tableData = res.data.result.data
@@ -234,7 +232,7 @@ export default {
         }
       })
 
-      console.log(this.searchCondition)
+      // console.log(this.searchCondition)
       // console.log(this.searchData)
       if (this.searchCondition) {
         this.searchCondition = false
@@ -246,6 +244,26 @@ export default {
           message: '搜索条件不能为空'
         })
       }
+    },
+
+    /*
+     * @description
+     * pageSize 当前页条数改变时
+     * */
+    handleSizeChange (val) {
+      // console.log(`每页 ${val} 条`)
+      this.pagesize = val
+      this.loadData()
+    },
+
+    /*
+     * @description
+     * CurrentChange 当前页改变时
+     * */
+    handleCurrentChange (val) {
+      // console.log(`当前页: ${val}`)
+      this.page = val
+      this.loadData()
     }
   }
 }
