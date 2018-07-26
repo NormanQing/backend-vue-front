@@ -35,10 +35,10 @@ export default class Member {
           prop: 'email', form: {email: ''}, label: '邮箱', type: 'text', placeholder: '邮箱'
         },
         {
-          prop: 'sex', form: {sex: ''}, label: '性别', type: 'radio', options: [{value: 'm', label: '男'}, {value: 'f', label: '女'}]
+          prop: 'sex', form: {sex: []}, label: '性别', type: 'radio', options: [{value: 'm', label: '男'}, {value: 'f', label: '女'}]
         },
         {
-          prop: 'hoby', form: {hoby: ''}, label: '爱好', type: 'checkbox', options: [{value: 'foot', label: '足球'}, {value: 'basket', label: '篮球'}]
+          prop: 'hoby', form: {hoby: []}, label: '爱好', type: 'checkbox', options: [{value: 'foot', label: '足球'}, {value: 'basket', label: '篮球'}]
         }
       ]
     }

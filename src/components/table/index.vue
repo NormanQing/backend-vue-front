@@ -19,14 +19,14 @@
           <!--文本域-->
           <el-input v-else-if="search.type === 'textarea'" :type="textarea" v-model="search.form[search.prop]" placeholder="search.placeholder"></el-input>
           <!--单选框-->
-          <el-radio-group v-else-if="search.type === 'radio'" v-model="search.prop">
+          <el-radio-group v-else-if="search.type === 'radio'" v-model="search.form[search.prop]">
             <el-radio v-for="(option, key) in search.options" :key="key" :label="option.value">
               {{option.label}}
             </el-radio>
           </el-radio-group>
           <!--复选框-->
-          <el-checkbox-group v-else-if="search.type === 'checkbox'" v-model="search.prop">
-            <el-checkbox v-for="(option, key) in search.options" :key="key" :label="option.label"></el-checkbox>
+          <el-checkbox-group v-else-if="search.type === 'checkbox'" v-model="search.form[search.prop]">
+            <el-checkbox name="search.prop" v-for="(option, key) in search.options" :key="key" :label="option.label"></el-checkbox>
           </el-checkbox-group>
           <!--开始时间-->
           <el-date-picker v-if="search.prop === 'startDate'" type="date" v-model="search.form[search.prop]" :value-format="search.valueFormart" :picker-options="search.options">
@@ -36,7 +36,7 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">搜索</el-button>
+          <el-button type="primary" @click="search">搜索</el-button>
           <el-button>清除</el-button>
         </el-form-item>
       </el-form>
@@ -130,6 +130,9 @@ export default {
       // 每页显示数量
       pagesize: constants.PAGE_SIZE,
 
+      // table数据
+      tableData: [],
+
       // table 显示字段标题
       columns: this.modules.tableColumns(),
 
@@ -139,9 +142,8 @@ export default {
       searchAllForm: {},
       // 保存搜索数据
       searchData: {},
-
-      // table数据
-      tableData: []
+      // 是否选择了搜索条件
+      searchCondition: false
     }
   },
   props: {
@@ -203,6 +205,47 @@ export default {
         this.tableData = res.data.result.data
         res.meta !== undefined && (this.pagination = res.meta.pagination)
       })
+    },
+
+    /**
+     * 带搜索条件加载数据
+     */
+    seachLoadData (searchData) {
+      searchData.page = this.page
+      searchData.pagesize = this.pagesize
+
+      this.$http.get(this.modules.url, { params: searchData }).then((res) => {
+        console.log(res)
+        this.tableData = res.data.result.data
+        res.meta !== undefined && (this.pagination = res.meta.pagination)
+      })
+    },
+
+    /**
+     * 搜索
+     */
+    search () {
+      console.info('this.searchForm', this.searchForm)
+      this.searchForm.forEach(element => {
+        if (element.form[element.prop] !== '' && element.form[element.prop].length !== 0) {
+          // console.log(typeof element.form[element.prop])
+          this.searchData[element.prop] = element.form[element.prop]
+          this.searchCondition = true
+        }
+      })
+
+      console.log(this.searchCondition)
+      // console.log(this.searchData)
+      if (this.searchCondition) {
+        this.searchCondition = false
+        this.seachLoadData(this.searchData)
+      } else {
+        console.log('no search')
+        this.$message({
+          type: 'info',
+          message: '搜索条件不能为空'
+        })
+      }
     }
   }
 }

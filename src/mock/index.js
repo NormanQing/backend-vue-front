@@ -7,20 +7,13 @@ Mock.mock(
     status_code: 0,
     message: 'SUCCESS',
     result: {
-      data: [
+      'data|20': [
         {
-          id: 1,
-          user: 'zhangsan',
-          email: '132@qq.com',
-          sex: 'm',
-          hoby: '篮球'
-        },
-        {
-          id: 2,
-          user: 'lisi',
-          email: '189@qq.com',
-          sex: 'f',
-          hoby: '足球'
+          'id|+1': 1,
+          user: '@cname',
+          email: '@email',
+          'sex|1': ['男', '女'],
+          'hoby|1': ['篮球', '足球', '排球']
         }
       ]
     }
