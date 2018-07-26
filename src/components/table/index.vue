@@ -41,7 +41,10 @@
         </el-form-item>
       </el-form>
       <!--table-->
-      <el-table style="100%" :data="tableData">
+      <el-table
+      style="100%"
+      :data="tableData"
+      :default-sort="{prop: (columns.sortField != undefined ? columns.sortField : 'id'), order: (columns.orderBy ? columns.orderBy : 'ascending')}">
         <!--多选功能-->
         <el-table-column v-if="columns.selection === true" width="55" type="selection"></el-table-column>
         <!--开启展开功能-->
@@ -54,19 +57,10 @@
             </el-form>
           </template>
         </el-table-column>
-        <!--字段名必须要和datas字段相匹配-->
-        <el-table-column
-          v-else-if="columns.formatter"
-          v-for="(field, key) in columns.tableField" :key="key"
-          :formatter="columns.formatter"
-          :prop="field.prop"
-          :label="field.label"
-          align="center"
-        >
-        </el-table-column>
         <el-table-column
           v-else
           v-for="(field, key) in columns.tableField" :key="key"
+          :sortable="field.sorttable"
           :prop="field.prop"
           :label="field.label"
           align="center"
