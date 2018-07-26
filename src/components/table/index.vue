@@ -177,7 +177,7 @@ export default {
     loadData () {
       this.searchData.page = this.page
       this.searchData.pagesize = this.pagesize
-      this.tableData = [
+      /* this.tableData = [
         {
           id: 1,
           user: 'zhangsan',
@@ -192,12 +192,12 @@ export default {
           sex: 'f',
           hoby: '足球'
         }
-      ]
-      /* this.$http.get(this.modules.url, { params: this.searchData }).then((res) => {
+      ] */
+      this.$http.get(this.modules.url, { params: this.searchData }).then((res) => {
         console.log(res)
-        this.tableData = res.result.data
+        this.tableData = res.data.result.data
         res.meta !== undefined && (this.pagination = res.meta.pagination)
-      }) */
+      })
     }
   }
 }
