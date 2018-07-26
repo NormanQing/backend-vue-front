@@ -2,7 +2,7 @@
   <div class="c-table">
     <div class="search">
       <el-form v-if="searchForm" :inline="true" size="mini">
-        <el-form-item v-for="(search, key) in searchForm" :key="key">
+        <el-form-item v-for="(search, key) in searchForm" :key="key" :label="search.label">
           <!-- input输入框 -->
           <el-input v-if="search.type === 'text' || search.type === 'password'" :type="search.type" v-model="search.form[search.prop]" :placeholder="search.placeholder"></el-input>
           <!--数字输入框-->
@@ -61,6 +61,7 @@
           :formatter="columns.formatter"
           :prop="field.prop"
           :label="field.label"
+          align="center"
         >
         </el-table-column>
         <el-table-column
@@ -68,6 +69,7 @@
           v-for="(field, key) in columns.tableField" :key="key"
           :prop="field.prop"
           :label="field.label"
+          align="center"
         >
         </el-table-column>
         <!--其它操作-->
@@ -170,16 +172,32 @@ export default {
         this.searchAllForm = this.modules.searchForm()
         this.searchForm = this.modules.searchForm().search
       }
-      // this.loadData()
+      this.loadData()
     },
     loadData () {
       this.searchData.page = this.page
       this.searchData.pagesize = this.pagesize
-      this.$http.get(this.modules.url, { params: this.searchData }).then((res) => {
+      this.tableData = [
+        {
+          id: 1,
+          user: 'zhangsan',
+          email: '132@qq.com',
+          sex: 'm',
+          hoby: '篮球'
+        },
+        {
+          id: 2,
+          user: 'lisi',
+          email: '189@qq.com',
+          sex: 'f',
+          hoby: '足球'
+        }
+      ]
+      /* this.$http.get(this.modules.url, { params: this.searchData }).then((res) => {
         console.log(res)
         this.tableData = res.result.data
         res.meta !== undefined && (this.pagination = res.meta.pagination)
-      })
+      }) */
     }
   }
 }
