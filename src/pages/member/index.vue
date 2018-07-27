@@ -1,16 +1,15 @@
 <template>
-<m-table :modules="module" :isShowEditBtn="false" :deleteText="deleteText"></m-table>
+<c-table :modules="module"></c-table>
 </template>
 
 <script>
-import MTable from 'components/table'
+import CTable from 'components/table'
 import Member from 'modules/Member'
 export default {
-  components: {MTable},
+  components: {CTable},
   data () {
     return {
-      module: new Member(),
-      deleteText: '加入黑名单'
+      module: new Member()
     }
   }
 }

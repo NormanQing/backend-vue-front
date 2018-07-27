@@ -23,7 +23,8 @@ Mock.mock(
           user: '@cname',
           email: '@email',
           'sex|1': ['男', '女'],
-          'hoby|1': ['篮球', '足球', '排球']
+          'hoby': ['篮球', '足球', '排球'],
+          'status|1': [0, 1]
         }
       ]
     }

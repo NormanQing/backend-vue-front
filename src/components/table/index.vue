@@ -37,7 +37,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="search">搜索</el-button>
-          <el-button>清除</el-button>
+          <el-button @click="resetSearch" v-if="searchAllForm.isShowClearBtn !== false">清除</el-button>
         </el-form-item>
       </el-form>
       <!--table-->
@@ -84,18 +84,20 @@
             <el-popover
             v-if="isShowDeleteBtn"
             placement="right"
-            width="200"
+            width="150"
             trigger="focus"
             >
               <div>
                 <p>是否确定删除</p>
                 <el-button>确定</el-button>
               </div>
-              <el-button type="danger" slot="reference">{{deleteText}}</el-button>
+              <el-button type="danger" size="mini" slot="reference">{{deleteText}}</el-button>
             </el-popover>
             <el-button
             v-if="isShowEditBtn"
             size="mini"
+            type="primary"
+            @click="update(scope.row)"
             >编辑</el-button>
           </template>
       </el-table-column>
@@ -110,13 +112,25 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="pagination.total">
       </el-pagination>
+      <c-edit-form
+      v-if="editStatus"
+      :modules="modules"
+      :formValues="formValues"
+      @refresh-table="refreshData"
+      >
+      </c-edit-form>
     </div>
   </div>
 </template>
 
 <script>
 import * as constants from '@/constants'
+import Utils from 'modules/Utils'
+import CEditForm from 'components/edit-form'
 export default {
+  components: {
+    CEditForm
+  },
   data () {
     return {
       /**
@@ -146,8 +160,12 @@ export default {
       // table数据
       tableData: [],
 
+      // 编辑状态
+      editStatus: false,
+
       // table 显示字段标题
       columns: this.modules.tableColumns(),
+      formValues: [],
 
       // 搜索使用表单 默认不使用
       searchForm: false,
@@ -168,17 +186,26 @@ export default {
     // 是否显示其它操作(数据类型)
     otherOperating: {
       type: Boolean,
-      default: false
+      default: true
     },
     // 是否显示删除按钮(数据类型)
     isShowDeleteBtn: {
       type: Boolean,
       default: true
     },
+    // 是否显示删除按钮(数据类型)
+    deleteText: {
+      type: String,
+      default: '删除'
+    },
     // 是否显示编辑按钮(数据类型)
     isShowEditBtn: {
       type: Boolean,
       default: true
+    },
+    // 更新回调函数
+    updateCallback: {
+      type: Function
     }
   },
   created () {
@@ -264,6 +291,61 @@ export default {
       // console.log(`当前页: ${val}`)
       this.page = val
       this.loadData()
+    },
+
+    /*
+     * @description
+     * 是否显示编辑表单
+     */
+    updateEditStatus () {
+      this.editStatus = !this.editStatus
+    },
+
+    /**
+     * 更新
+     */
+    update (row) {
+      if (this.updateCallback) {
+        // 更新回调函数
+        this.updateCallback(row)
+      } else {
+        let form = this.modules.form()
+        form['id'] = row['id']
+        for (let v in row) {
+          if (form.hasOwnProperty(v)) {
+            form[v] = Utils.checkStrToNum(row[v]) === true ? parseFloat(row[v]) : row[v]
+          }
+        }
+        this.formValues = form
+        console.info('this.forValues', this.formValues)
+        this.updateEditStatus()
+      }
+    },
+    refreshData (newValue) {
+      this.updateEditStatus()
+      // 等于false 说明没有更新表单值
+      if (newValue !== false) {
+        this.tableData.forEach(item => {
+          if (item.id === newValue.id) {
+            for (let value in newValue) {
+              if (item.hasOwnProperty(value)) {
+                item[value] = newValue[value]
+              }
+            }
+            return true
+          }
+        })
+      }
+    },
+
+    /**
+     * 清除搜索条件，从新加载
+     */
+    resetSearch () {
+      this.searchForm.forEach((v) => {
+        v.form[v.prop] = ''
+      })
+      this._initData()
     }
   }
 }
