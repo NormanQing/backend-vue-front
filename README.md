@@ -5,6 +5,9 @@
 ## Build Setup
 
 ``` bash
+# 配置本地环境
+将static目录下的api_config.dev.js 复制并且重命名为api_config.js api domin切换成自己本地的api domin
+
 # install dependencies
 npm install
 
