@@ -1,5 +1,5 @@
 <template>
-  <el-aside width="230px">
+  <el-aside :width="$store.state.aside_width">
     <el-menu
       :unique-opened="true"
       class="el-menu-vertical-demo"
@@ -49,8 +49,4 @@ export default {
 </script>
 
 <style lang="less">
-aside {
-  flex: 0 0 230px;
-  width: 230px;
-}
 </style>
