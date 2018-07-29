@@ -47,8 +47,8 @@
       </el-row>
       <el-row :push="leftColumn" :span="11">
         <el-form-item>
-          <el-button>立即创建</el-button>
-          <el-button>重置</el-button>
+          <el-button type="primary">立即创建</el-button>
+          <el-button @click="resetForm">重置</el-button>
         </el-form-item>
       </el-row>
     </el-form>
@@ -69,6 +69,14 @@ export default {
   props: {
     modules: {
       type: Object
+    }
+  },
+  methods: {
+    /**
+     * 重置表单
+     */
+    resetForm () {
+      this.$refs[this.formName].resetFields()
     }
   }
 }
