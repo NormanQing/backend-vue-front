@@ -72,7 +72,7 @@ export default {
       formName: 'form',
       formLabelWidth: '150px',
       dialogFormVisible: true,
-      columns: this.modules.fromColumns(),
+      columns: this.modules.formColumns(),
       flag: false // 标示是否更新了表单
     }
   },

@@ -23,7 +23,7 @@ export default class Member {
   /**
    * 生成表单
    */
-  fromColumns () {
+  formColumns () {
     return [
       { prop: 'user', label: '用户名', type: 'text' },
       { prop: 'email', label: '邮箱', type: 'text' },
@@ -76,6 +76,24 @@ export default class Member {
         {prop: 'sex', label: '性别', type: 'text'},
         {prop: 'hoby', label: '爱好', type: 'text'},
         {prop: 'status', label: '状态', type: 'text'}
+      ]
+    }
+  }
+
+  /**
+     * 表单验证规则
+     */
+  rules () {
+    return {
+      user: [
+        { required: true, message: '请输入用户名', trigger: 'blur' },
+        { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+      ],
+      email: [
+        { required: true, message: '请输入密码', trigger: 'blur' }
+      ],
+      sex: [
+        { required: true, message: '请选择性别', trigger: 'blur' }
       ]
     }
   }
