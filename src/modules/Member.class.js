@@ -4,7 +4,7 @@
 
 export default class Member {
   constructor () {
-    this.url = 'member'
+    this.url = 'test'
   }
 
   /**

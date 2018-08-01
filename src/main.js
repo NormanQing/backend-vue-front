@@ -14,7 +14,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import '../static/api_config'
 import './plugins/axios'
 
-import './mock'
+// import './mock'
 
 NProgress.inc(0.2)
 NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
